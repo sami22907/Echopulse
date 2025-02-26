@@ -1,32 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROCK ON CHITTAGONG 2025 | Free Ticket Booking</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Audiowide&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 1200px) {
+            h1 { font-size: 3rem; }
+            .sponsor-tiers { padding: 4rem 5%; }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">ECHO PLUSH</div>
+    <header class="luxury-header">
+        <div class="header-content">
+            <h1>Rock On Chittagong 2025</h1>
+            <p class="subtitle">An Exclusive EchoPulse Production</p>
+            <div class="countdown" id="countdown"></div>
+            <button class="gold-button">Secure Sponsorship</button>
+        </div>
     </header>
 
-    <section class="hero">
-        <div>
-            <h1>April 13, 2025</h1>
-            <p>M.A. Aziz Stadium, Chittagong</p>
-            <a href="register.html" class="cta-button">GET FREE TICKET</a>
-        </div>
-    </section>
-
-    <div class="verification">
-        <h2>টিকিট যাচাই করুন</h2>
-        <input type="text" id="serialNumber" placeholder="সিরিয়াল নম্বর দিন">
-        <button onclick="checkTicket()">টিকিট চেক করুন</button>
-        <div class="verification-result" id="verificationResult"></div>
+    <div class="marquee-bar">
+        <span>15,000+ Attendees • National Media Coverage • Exclusive Artist Access • Premium Brand Exposure</span>
     </div>
 
-    <script src="script.js"></script>
+    <section class="sponsor-tiers">
+        <div class="tier-card diamond-tier">
+            <h3>Diamond Title Sponsor</h3>
+            <p class="price">55 Lakh BDT</p>
+            <ul class="benefits-list">
+                <li><i class="fas fa-crown"></i>Exclusive Naming Rights</li>
+                <li><i class="fas fa-star"></i>Prime Stage Branding</li>
+                <li><i class="fas fa-users"></i>Executive VIP Lounge Access</li>
+                <!-- Add more benefits -->
+            </ul>
+            <button class="gold-button">Request Proposal</button>
+        </div>
+
+        <!-- Add other tiers with similar structure -->
+    </section>
+
+    <section class="contact-section">
+        <h2>Strategic Partnership Inquiry</h2>
+        <form class="luxury-form">
+            <div class="form-grid">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Corporate Email" required>
+                <input type="tel" placeholder="Contact Number">
+                <select required>
+                    <option value="">Select Sponsorship Tier</option>
+                    <!-- Options -->
+                </select>
+                <textarea placeholder="Strategic Partnership Proposal" rows="5"></textarea>
+            </div>
+            <button type="submit" class="gold-button">Submit Executive Inquiry</button>
+        </form>
+    </section>
+
+    <footer class="luxury-footer">
+        <div class="footer-content">
+            <div class="footer-branding">
+                <h4>EchoPulse x Rock On Bangladesh</h4>
+                <p>Elevating Music Experiences Since 2015</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2024 EchoPulse International. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        const countdownDate = new Date('April 13, 2025 00:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="countdown-item">
+                    <span>${days}</span> DAYS
+                </div>
+                <div class="countdown-item">
+                    <span>${hours}</span> HOURS
+                </div>
+                <div class="countdown-item">
+                    <span>${minutes}</span> MINUTES
+                </div>
+            `;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
