@@ -5,7 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROCK ON CHITTAGONG 2025 | Free Ticket Booking</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Audiowide&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+        .header {
+            background: rgba(0,0,0,0.9);
+            padding: 1rem;
+            border-bottom: 2px solid #ff0000;
+        }
+        .logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 2.5rem;
+            color: #ff0000;
+        }
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        .tickets-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background: #000;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            margin: 2rem auto;
+            border: 2px solid #ff0000;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: #1a1a1a;
+            border: 1px solid #ff0000;
+            color: white;
+        }
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        .verification {
+            padding: 2rem;
+            text-align: center;
+        }
+        .verification input {
+            max-width: 300px;
+            margin: 1rem auto;
+        }
+        .verification-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #ff0000;
+        }
+        .registration-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -16,7 +106,7 @@
         <div>
             <h1>April 13, 2025</h1>
             <p>M.A. Aziz Stadium, Chittagong</p>
-            <a href="register.html" class="cta-button">GET FREE TICKET</a>
+            <button onclick="openModal()">GET FREE TICKET</button>
         </div>
     </section>
 
@@ -27,6 +117,74 @@
         <div class="verification-result" id="verificationResult"></div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="modal" id="ticketModal">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="float:right; cursor:pointer">&times;</span>
+            <h2>Free Ticket Registration</h2>
+            <form id="bookingForm">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <button type="submit">Confirm Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw6lcjdgidnvz-xGlPQScegIAH0Q8yLeZdaTyXV3vi0wDdi8ArVq4mHI747HSvAKF19aQ/exec';
+
+        function openModal() {
+            document.getElementById('ticketModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('ticketModal').style.display = 'none';
+        }
+
+        async function checkTicket() {
+            const serial = document.getElementById('serialNumber').value;
+            const resultDiv = document.getElementById('verificationResult');
+            
+            if(!serial) {
+                resultDiv.innerHTML = "Please enter a serial number";
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://script.google.com/macros/s/YOUR_VERIFICATION_SCRIPT_ID/exec?serial=${serial}`);
+                const data = await response.json();
+                
+                if(data.status === 'valid') {
+                    resultDiv.innerHTML = `✅ Valid Ticket!<br>Name: ${data.name}<br>Email: ${data.email}`;
+                } else {
+                    resultDiv.innerHTML = "❌ Invalid Ticket Number";
+                }
+            } catch (error) {
+                resultDiv.innerHTML = "Error checking ticket. Please try again.";
+            }
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                alert('Registration Successful! You will receive confirmation via SMS and Email');
+                closeModal();
+            } catch (error) {
+                alert('Error submitting form! Please try again.');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('ticketModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
