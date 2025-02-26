@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <!-- বর্তমান head কন্টেন্ট অপরিবর্তিত রাখুন -->
+    <!-- ... -->
+</head>
+<body>
+    <!-- বর্তমান HTML স্ট্রাকচার অপরিবর্তিত রাখুন -->
+    <!-- ... -->
 
+    <script>
+        const scriptURL = 'আপনার_ডিপ্লয়_করা_স্ক্রিপ্ট_URL'; // এখানে আপনার ডিপ্লয় করা স্ক্রিপ্টের URL দিন
+
+        // ফর্ম সাবমিশনের আগের সমস্ত ফাংশন অপরিবর্তিত থাকবে
+
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const formProps = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(formProps),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                if(result.status === 'success') {
+                    alert(`নিবন্ধন সফল হয়েছে! অনুগ্রহ করে ${formProps.email} চেক করুন নিশ্চিতকরণের জন্য`);
+                    closeModal();
+                }
+            } catch (error) {
+                alert('ফর্ম জমা দিতে সমস্যা হচ্ছে! অনুগ্রহ করে আবার চেষ্টা করুন।');
+            }
+        });
+
+        async function checkTicket() {
+            const serial = document.getElementById('serialNumber').value;
+            const resultDiv = document.getElementById('verificationResult');
+            
+            try {
+                const response = await fetch(`${scriptURL}?serial=${serial}`);
+                const data = await response.json();
+                
+                if(data.status === 'valid') {
+                    resultDiv.innerHTML = `✅ বৈধ টিকিট!<br>নাম: ${data.name}<br>ইমেইল: ${data.email}`;
+                } else {
+                    resultDiv.innerHTML = "❌ অবৈধ টিকিট নম্বর";
+                }
+            } catch (error) {
+                resultDiv.innerHTML = "টিকিট যাচাই করতে সমস্যা হচ্ছে। অনুগ্রহ করে আবার চেষ্টা করুন।";
+            }
+        }
+    </script>
+</body>
+</html>
