@@ -1,60 +1,56 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// Form Submission Handler
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = e.parameter;
+  
+  const serial = Utilities.getUuid().slice(0, 8).toUpperCase();
+  
+  const newRow = [
+    new Date(),
+    data.name,
+    data.email,
+    data.phone,
+    serial
+  ];
+  
+  sheet.appendRow(newRow);
+  
+  // Send confirmation email
+  const emailBody = `
+    <h1>ROCK ON CHITTAGONG 2025</h1>
+    <p>Your registration is confirmed!</p>
+    <p>Serial Number: <strong>${serial}</strong></p>
+    <p>Show this serial number at the entrance.</p>
+  `;
+  
+  GmailApp.sendEmail(
+    data.email,
+    "Ticket Confirmation - Rock On Chittagong 2025",
+    "",
+    {
+      htmlBody: emailBody,
+      from: 'si589838@gmail.com'
+    }
+  );
+
+  return ContentService.createTextOutput(JSON.stringify({status: 'success', serial: serial})).setMimeType(ContentService.MimeType.JSON);
 }
-body {
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-}
-.header {
-    background: rgba(0,0,0,0.9);
-    padding: 1rem;
-    border-bottom: 2px solid #ff0000;
-}
-.logo {
-    font-family: 'Audiowide', cursive;
-    font-size: 2.5rem;
-    color: #ff0000;
-}
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819') center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-h1 {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 5rem;
-    margin-bottom: 1rem;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-}
-.modal-content {
-    background: #000;
-    padding: 2rem;
-    width: 90%;
-    max-width: 500px;
-    margin: 2rem auto;
-    border: 2px solid #ff0000;
-}
-button {
-    background: #ff0000;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    cursor: pointer;
-}
-.verification {
-    padding: 2rem;
-    text-align: center;
-}
+
+// Verification Handler
+function doGet(e) {
+  const serial = e.parameter.serial;
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = sheet.getDataRange().getValues();
+  
+  for(let i = 1; i < data.length; i++) {
+    if(data[i][4] === serial) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'valid',
+        name: data[i][1],
+        email: data[i][2]
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({status: 'invalid'})).setMimeType(ContentService.MimeType.JSON);
+    }
