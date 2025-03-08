@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Plus - Where Rock Meets Innovation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <h1>EchoTic</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>  Let's Rock Meets Innovation</h2>
+      <p>Experience the energy of rock music with Echo Tic.</p>
+      <a href="#events" class="cta-button">View Upcoming Events</a>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>Echo Tic is not just a rock company; we're a musical revolution. Combining raw energy with innovation, we bring the best of rock music to life.</p>
+    <div class="band-members">
+      <div class="member">
+        <img src="member1.jpg" alt="Band Member 1">
+        <h3>John Doe</h3>
+        <p>Lead Guitarist</p>
+      </div>
+      <div class="member">
+        <img src="member2.jpg" alt="Band Member 2">
+        <h3>Jane Smith</h3>
+        <p>Vocalist</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events" class="events">
+    <h2>Rock on Chittagong</h2>
+    <div class="event-list">
+      <div class="event">
+        <h3>Rock Night 2025</h3>
+        <p>Date: April 14, 2025</p>
+        <p>Location: CRB</p>
+        <a href="#" class="cta-button">Coming soon </a>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-images">
+      <img src="gallery1.jpg" alt="Event 1">
+      <img src="gallery2.jpg" alt="Event 2">
+      <img src="gallery3.jpg" alt="Event 3">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="contact-info">
+      <p>Address:  come to chander dese</p>
+      <p>Phone: 01823963097</p>
+      <p>Email: si589838@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Echo Tic. All Rights Reserved.</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com/profile.php?id=61573518357985">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+      <a href="#">YouTube</a>
+    </div>
+  </footer>
+</body>
+</html>
