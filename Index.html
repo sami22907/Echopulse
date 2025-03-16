@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জরুরি সংযোগ - শরীয়তপুর</title>
+    <style>
+        :root {
+            --primary-color: #0275d8;
+            --accent-color: #d9534f;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: #f1f1f1;
+            padding: 1rem;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #e0e0e0;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .contact-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-info p.emergency {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 30px 30px 0 0;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    জরুরি সংযোগ - শরীয়তপুর জেলা
+</header>
+
+<div class="container">
+    <label for="upazilaSelect">উপজেলা নির্বাচন করুন:</label>
+    <select id="upazilaSelect" onchange="updateContacts()">
+        <option value="">উপজেলা নির্বাচন করুন</option>
+        <option value="জাজিরা">জাজিরা</option>
+        <option value="শরীয়তপুর সদর">শরীয়তপুর সদর</option>
+        <option value="গোসাইরহাট">গোসাইরহাট</option>
+        <option value="ডামুড্যা">ডামুড্যা</option>
+        <option value="নড়িয়া">নড়িয়া</option>
+        <option value="ভেদরগঞ্জ">ভেদরগঞ্জ</option>
+    </select>
+
+    <main id="mainContent">
+        <p class="no-data">অনুগ্রহ করে উপজেলা নির্বাচন করুন</p>
+    </main>
+</div>
+
+<footer>
+    <p>VBD-Shariatpur District</p>
+</footer>
+
+<script>
+    const database = {
+        "জাজিরা": {
+            police: [{ name: "জাজিরা থানা", number: "01700-000000", officer: "মোঃ রফিকুল ইসলাম (ওসি)", emergency: "999" }],
+            hospital: [{ name: "জাজিরা হাসপাতাল", number: "01900-000000", ambulance: "01711-223344" }],
+            fire: [{ name: "জাজিরা ফায়ার স্টেশন", number: "01600-000000", emergency: "999" }]
+        },
+        "শরীয়তপুর সদর": {
+            police: [{ name: "সদর থানা", number: "01700-111111", officer: "মোঃ করিম উদ্দিন (ওসি)", emergency: "999" }],
+            hospital: [{ name: "শরীয়তপুর সদর হাসপাতাল", number: "01900-111111", ambulance: "01711-334455" }],
+            fire: [{ name: "সদর ফায়ার স্টেশন", number: "01600-111111", emergency: "999" }]
+        },
+        "গোসাইরহাট": {
+            police: [{ name: "গোসাইরহাট থানা", number: "01700-222222", officer: "মোঃ মিজানুর রহমান (ওসি)", emergency: "999" }],
+            hospital: [{ name: "গোসাইরহাট হাসপাতাল", number: "01900-222222", ambulance: "01711-445566" }],
+            fire: [{ name: "গোসাইরহাট ফায়ার স্টেশন", number: "01600-222222", emergency: "999" }]
+        },
+        "ডামুড্যা": {
+            police: [{ name: "ডামুড্যা থানা", number: "01700-333333", officer: "মোঃ ফারুক আহমেদ (ওসি)", emergency: "999" }],
+            hospital: [{ name: "ডামুড্যা হাসপাতাল", number: "01900-333333", ambulance: "01711-556677" }],
+            fire: [{ name: "ডামুড্যা ফায়ার স্টেশন", number: "01600-333333", emergency: "999" }]
+        },
+        "নড়িয়া": {
+            police: [{ name: "নড়িয়া থানা", number: "01700-444444", officer: "মোঃ সাইফুল ইসলাম (ওসি)", emergency: "999" }],
+            hospital: [{ name: "নড়িয়া হাসপাতাল", number: "01900-444444", ambulance: "01711-667788" }],
+            fire: [{ name: "নড়িয়া ফায়ার স্টেশন", number: "01600-444444", emergency: "999" }]
+        },
+        "ভেদরগঞ্জ": {
+            police: [{ name: "ভেদরগঞ্জ থানা", number: "01700-555555", officer: "মোঃ রেজাউল করিম (ওসি)", emergency: "999" }],
+            hospital: [{ name: "ভেদরগঞ্জ হাসপাতাল", number: "01900-555555", ambulance: "01711-778899" }],
+            fire: [{ name: "ভেদরগঞ্জ ফায়ার স্টেশন", number: "01600-555555", emergency: "999" }]
+        }
+    };
+
+    function createContactItem(item) {
+        return `<div class="contact-item" onclick="callNumber('${item.number}')">
+            <i class="fas fa-phone-alt contact-icon"></i>
+            <div class="contact-info">
+                <h3>${item.name}</h3>
+                ${item.officer ? `<p>${item.officer}</p>` : ''}
+                <p>${item.number}</p>
+                ${item.emergency ? `<p class="emergency">জরুরি নম্বর: ${item.emergency}</p>` : ''}
+                ${item.ambulance ? `<p class="emergency">অ্যাম্বুলেন্স: ${item.ambulance}</p>` : ''}
+            </div>
+        </div>`;
+    }
+
+    function updateContacts() {
+        const upazila = document.getElementById("upazilaSelect").value;
+        const mainContent = document.getElementById("mainContent");
+        mainContent.innerHTML = "";
+
+        if (!database[upazila]) {
+            mainContent.innerHTML = `<p class="no-data">তথ্য পাওয়া যায়নি</p>`;
+            return;
+        }
+
+        ["police", "hospital", "fire"].forEach(service => {
+            database[upazila][service].forEach(item => {
+                mainContent.innerHTML += createContactItem(item);
+            });
+        });
+    }
+
+    function callNumber(number) {
+        window.location.href = `tel:${number}`;
+    }
+</script>
+
+</body>
+</html>
