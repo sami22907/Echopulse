@@ -1,198 +1,888 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জরুরি সংযোগ - শরীয়তপুর</title>
-    <style>
-        :root {
-            --primary-color: #0275d8;
-            --accent-color: #d9534f;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-
-        header {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        select {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            background: #f1f1f1;
-            padding: 1rem;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .contact-item:hover {
-            background: #e0e0e0;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-
-        .contact-info h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .contact-info p {
-            margin: 5px 0;
-        }
-
-        .contact-info p.emergency {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 2rem;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        footer {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-            border-radius: 30px 30px 0 0;
-        }
-    </style>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>METAL ERROR - Official Band Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== Global Styles ===== */
+    :root {
+      --primary: #ff0000;
+      --secondary: #000000;
+      --accent: #ffcc00;
+      --text: #ffffff;
+      --bg: #111111;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--accent);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--primary);
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+      margin: 15px auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--text);
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .cta-button:hover {
+      background-color: var(--accent);
+      color: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+    
+    /* ===== Header Styles ===== */
+    header {
+      background-color: rgba(0, 0, 0, 0.9);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    header.scrolled {
+      padding: 15px 0;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .logo h1 {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      color: var(--text);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    
+    /* ===== Hero Section ===== */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero-content {
+      width: 100%;
+      animation: fadeIn 1.5s ease;
+    }
+    
+    .hero h2 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+    
+    /* ===== About Section ===== */
+    .about {
+      background-color: var(--secondary);
+    }
+    
+    .about p {
+      max-width: 800px;
+      margin: 0 auto 50px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    
+    .band-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .member {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .member img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid var(--primary);
+      transition: transform 0.3s ease;
+    }
+    
+    .member:hover img {
+      transform: scale(1.1);
+    }
+    
+    .member h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+    
+    .member p {
+      color: var(--text);
+      opacity: 0.8;
+    }
+    
+    /* ===== Events Section ===== */
+    .events {
+      background-color: var(--bg);
+    }
+    
+    .event-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .event {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 10px;
+      border-left: 5px solid var(--primary);
+      transition: transform 0.3s ease;
+    }
+    
+    .event:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .event h3 {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .event p {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .event p i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    /* ===== Gallery Section ===== */
+    .gallery {
+      background-color: var(--secondary);
+    }
+    
+    .gallery-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-images img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 5px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .gallery-images img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* ===== Modal for Gallery ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow: auto;
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin-top: 50px;
+    }
+    
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    /* ===== Contact Section ===== */
+    .contact {
+      background-color: var(--bg);
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    input, textarea {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+    
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .contact-info h3 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    
+    .contact-info p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .contact-info p i {
+      margin-right: 10px;
+      color: var(--primary);
+      width: 20px;
+      text-align: center;
+    }
+    
+    .social-icons {
+      display: flex;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin-right: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    /* ===== Footer ===== */
+    footer {
+      background-color: #000;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    footer p {
+      margin-bottom: 20px;
+    }
+    
+    .social-links {
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      margin: 0 10px;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--primary);
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--accent);
+      color: var(--secondary);
+    }
+    
+    /* ===== Animations ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-20px) translateX(-50%); }
+      60% { transform: translateY(-10px) translateX(-50%); }
+    }
+    
+    /* ===== Responsive Styles ===== */
+    @media (max-width: 992px) {
+      .hero h2 {
+        font-size: 3rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.9);
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+      
+      nav.active {
+        left: 0;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      
+      nav ul li {
+        margin: 20px 0;
+      }
+      
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      .section {
+        padding: 60px 0;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .cta-button {
+        padding: 10px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <div class="logo">
+        <h1>METAL ERROR</h1>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav id="nav">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<header>
-    জরুরি সংযোগ - শরীয়তপুর জেলা
-</header>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <h2>Bangladesh's Hottest Metal Band</h2>
+      <p>Experience the raw power of METAL ERROR - where music meets rebellion and innovation.</p>
+      <a href="#events" class="cta-button">Upcoming Shows</a>
+    </div>
+    <a href="#about" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
 
-<div class="container">
-    <label for="upazilaSelect">উপজেলা নির্বাচন করুন:</label>
-    <select id="upazilaSelect" onchange="updateContacts()">
-        <option value="">উপজেলা নির্বাচন করুন</option>
-        <option value="জাজিরা">জাজিরা</option>
-        <option value="শরীয়তপুর সদর">শরীয়তপুর সদর</option>
-        <option value="গোসাইরহাট">গোসাইরহাট</option>
-        <option value="ডামুড্যা">ডামুড্যা</option>
-        <option value="নড়িয়া">নড়িয়া</option>
-        <option value="ভেদরগঞ্জ">ভেদরগঞ্জ</option>
-    </select>
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2 class="section-title">About The Band</h2>
+      <p>METAL ERROR is not just a band; we're a revolution. With 8 talented members, we bring the best of metal music to life, blending raw energy with innovation. Formed in Chittagong, we've been shaking the Bangladeshi metal scene with our unique sound and electrifying performances.</p>
+      
+      <div class="band-members">
+        <!-- Member 1 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Band Member">
+          <h3>Vocalist</h3>
+          <p>Lead Screams</p>
+        </div>
+        
+        <!-- Member 2 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Band Member">
+          <h3>Lead Guitar</h3>
+          <p>Shred Master</p>
+        </div>
+        
+        <!-- Member 3 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Band Member">
+          <h3>Rhythm Guitar</h3>
+          <p>Power Chords</p>
+        </div>
+        
+        <!-- Member 4 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Band Member">
+          <h3>Bassist</h3>
+          <p>Low End Crusher</p>
+        </div>
+        
+        <!-- Member 5 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Band Member">
+          <h3>Drummer</h3>
+          <p>Blast Beats</p>
+        </div>
+        
+        <!-- Member 6 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Band Member">
+          <h3>Keyboardist</h3>
+          <p>Atmosphere Creator</p>
+        </div>
+        
+        <!-- Member 7 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Band Member">
+          <h3>Backing Vocals</h3>
+          <p>Harmony & Growls</p>
+        </div>
+        
+        <!-- Member 8 -->
+        <div class="member">
+          <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Band Member">
+          <h3>Percussion</h3>
+          <p>Rhythm Keeper</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <main id="mainContent">
-        <p class="no-data">অনুগ্রহ করে উপজেলা নির্বাচন করুন</p>
-    </main>
-</div>
+  <!-- Events Section -->
+  <section id="events" class="section events">
+    <div class="container">
+      <h2 class="section-title">Upcoming Events</h2>
+      
+      <div class="event-list">
+        <div class="event">
+          <h3>Rock Night 2025</h3>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> April 14, 2025</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> CRB, Chittagong</p>
+          <p><i class="fas fa-clock"></i> <strong>Time:</strong> 7:00 PM</p>
+          <a href="#" class="cta-button">Get Tickets</a>
+        </div>
+        
+        <div class="event">
+          <h3>Metal Mayhem</h3>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> June 22, 2025</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Dhaka Stadium</p>
+          <p><i class="fas fa-clock"></i> <strong>Time:</strong> 6:30 PM</p>
+          <a href="#" class="cta-button">Coming Soon</a>
+        </div>
+        
+        <div class="event">
+          <h3>Error in the System Tour</h3>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> August 5-15, 2025</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Nationwide Tour</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Details:</strong> 5-city tour across Bangladesh</p>
+          <a href="#" class="cta-button">Tour Info</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-    <p>VBD-Shariatpur District</p>
-</footer>
+  <!-- Gallery Section -->
+  <section id="gallery" class="section gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      
+      <div class="gallery-images">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 1">
+        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 2">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 3">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 4">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 5">
+        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 6">
+        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 7">
+        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 8">
+        <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 9">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 10">
+        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 11">
+        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 12">
+        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 13">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 14">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 15">
+        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 16">
+        <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Concert Photo 17">
+      </div>
+    </div>
+  </section>
 
-<script>
-    const database = {
-        "জাজিরা": {
-            police: [{ name: "জাজিরা থানা", number: "01700-000000", officer: "মোঃ রফিকুল ইসলাম (ওসি)", emergency: "999" }],
-            hospital: [{ name: "জাজিরা হাসপাতাল", number: "01900-000000", ambulance: "01711-223344" }],
-            fire: [{ name: "জাজিরা ফায়ার স্টেশন", number: "01600-000000", emergency: "999" }]
-        },
-        "শরীয়তপুর সদর": {
-            police: [{ name: "সদর থানা", number: "01700-111111", officer: "মোঃ করিম উদ্দিন (ওসি)", emergency: "999" }],
-            hospital: [{ name: "শরীয়তপুর সদর হাসপাতাল", number: "01900-111111", ambulance: "01711-334455" }],
-            fire: [{ name: "সদর ফায়ার স্টেশন", number: "01600-111111", emergency: "999" }]
-        },
-        "গোসাইরহাট": {
-            police: [{ name: "গোসাইরহাট থানা", number: "01700-222222", officer: "মোঃ মিজানুর রহমান (ওসি)", emergency: "999" }],
-            hospital: [{ name: "গোসাইরহাট হাসপাতাল", number: "01900-222222", ambulance: "01711-445566" }],
-            fire: [{ name: "গোসাইরহাট ফায়ার স্টেশন", number: "01600-222222", emergency: "999" }]
-        },
-        "ডামুড্যা": {
-            police: [{ name: "ডামুড্যা থানা", number: "01700-333333", officer: "মোঃ ফারুক আহমেদ (ওসি)", emergency: "999" }],
-            hospital: [{ name: "ডামুড্যা হাসপাতাল", number: "01900-333333", ambulance: "01711-556677" }],
-            fire: [{ name: "ডামুড্যা ফায়ার স্টেশন", number: "01600-333333", emergency: "999" }]
-        },
-        "নড়িয়া": {
-            police: [{ name: "নড়িয়া থানা", number: "01700-444444", officer: "মোঃ সাইফুল ইসলাম (ওসি)", emergency: "999" }],
-            hospital: [{ name: "নড়িয়া হাসপাতাল", number: "01900-444444", ambulance: "01711-667788" }],
-            fire: [{ name: "নড়িয়া ফায়ার স্টেশন", number: "01600-444444", emergency: "999" }]
-        },
-        "ভেদরগঞ্জ": {
-            police: [{ name: "ভেদরগঞ্জ থানা", number: "01700-555555", officer: "মোঃ রেজাউল করিম (ওসি)", emergency: "999" }],
-            hospital: [{ name: "ভেদরগঞ্জ হাসপাতাল", number: "01900-555555", ambulance: "01711-778899" }],
-            fire: [{ name: "ভেদরগঞ্জ ফায়ার স্টেশন", number: "01600-555555", emergency: "999" }]
+  <!-- Modal for Gallery Images -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      
+      <div class="contact-container">
+        <form id="contactForm">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit" class="cta-button">Send Message</button>
+        </form>
+        
+        <div class="contact-info">
+          <h3>Booking & General Inquiries</h3>
+          <p><i class="fas fa-phone"></i> <strong>Phone:</strong> 01650288337</p>
+          <p><i class="fas fa-envelope"></i> <strong>Email:</strong> si589838@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Chittagong, Bangladesh</p>
+          
+          <h3>Follow Us</h3>
+          <p>Stay updated with our latest news and events</p>
+          
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/12EURojwefj/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/metalerrorofficial?igsh=MTVhdjJwOWU3dWZtdA==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@officialbandmetalerror?si=ydzNOohvfjzMLOxf" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/4NGgQfUQkPBzeEmriXoTn2?si=IDIve7GVTFmG9gbam26fJg" target="_blank"><i class="fab fa-spotify"></i></a>
+            <a href="https://www.tiktok.com/@metalerrorofficial?_t=ZS-8ufnF1X4YEC&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 METAL ERROR. All Rights Reserved.</p>
+      
+      <div class="social-links">
+        <a href="https://www.facebook.com/share/12EURojwefj/" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/metalerrorofficial?igsh=MTVhdjJwOWU3dWZtdA==" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@officialbandmetalerror?si=ydzNOohvfjzMLOxf" target="_blank">YouTube</a>
+        <a href="https://open.spotify.com/artist/4NGgQfUQkPBzeEmriXoTn2?si=IDIve7GVTFmG9gbam26fJg" target="_blank">Spotify</a>
+        <a href="https://www.tiktok.com/@metalerrorofficial?_t=ZS-8ufnF1X4YEC&_r=1" target="_blank">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#nav');
+    
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      menuToggle.innerHTML = nav.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('#header');
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    
+    // Back to top button
+    const backToTop = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('active', window.scrollY > 300);
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Smooth scrolling for all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
         }
-    };
-
-    function createContactItem(item) {
-        return `<div class="contact-item" onclick="callNumber('${item.number}')">
-            <i class="fas fa-phone-alt contact-icon"></i>
-            <div class="contact-info">
-                <h3>${item.name}</h3>
-                ${item.officer ? `<p>${item.officer}</p>` : ''}
-                <p>${item.number}</p>
-                ${item.emergency ? `<p class="emergency">জরুরি নম্বর: ${item.emergency}</p>` : ''}
-                ${item.ambulance ? `<p class="emergency">অ্যাম্বুলেন্স: ${item.ambulance}</p>` : ''}
-            </div>
-        </div>`;
-    }
-
-    function updateContacts() {
-        const upazila = document.getElementById("upazilaSelect").value;
-        const mainContent = document.getElementById("mainContent");
-        mainContent.innerHTML = "";
-
-        if (!database[upazila]) {
-            mainContent.innerHTML = `<p class="no-data">তথ্য পাওয়া যায়নি</p>`;
-            return;
-        }
-
-        ["police", "hospital", "fire"].forEach(service => {
-            database[upazila][service].forEach(item => {
-                mainContent.innerHTML += createContactItem(item);
-            });
-        });
-    }
-
-    function callNumber(number) {
-        window.location.href = `tel:${number}`;
-    }
-</script>
-
+      });
+    });
+    
+    // Gallery Modal
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close');
+    
+    document.querySelectorAll('.gallery-images img').forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'block';
+        modalImg.src = img.src;
+      });
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    // Form submission
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      contactForm.reset();
+    });
+  </script>
 </body>
 </html>
