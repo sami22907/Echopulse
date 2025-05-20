@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Budget Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #1e1e1e;
+      border-radius: 10px;
+    }
+    label, input, button, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #2c2c2c;
+      color: white;
+    }
+    button {
+      background-color: #00cc99;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #009977;
+    }
+  </style>
+</head>
+<body>
+  <h1>ব্যক্তিগত বাজেট ট্র্যাকার</h1>
+
+  <div class="section">
+    <h2>আয় ও খরচ সেট করুন</h2>
+    <label>মাসিক আয়:</label>
+    <input type="number" id="income" placeholder="যেমন: 5000" />
+
+    <label>ফিক্সড খরচ (বাসা ভাড়া + wifi + মোবাইল):</label>
+    <input type="number" id="fixed" placeholder="যেমন: 980" />
+
+    <label>ধার (মোট):</label>
+    <input type="number" id="loan" placeholder="যেমন: 930" />
+
+    <label>ধার কিস্তি সংখ্যা:</label>
+    <input type="number" id="loanMonth" placeholder="যেমন: 3" />
+
+    <label>প্রতিদিনের গড় খরচ:</label>
+    <input type="number" id="daily" placeholder="যেমন: 80" />
+
+    <button onclick="calculateBudget()">হিসাব দেখুন</button>
+  </div>
+
+  <div class="section">
+    <h2>ফলাফল</h2>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateBudget() {
+      const income = parseFloat(document.getElementById('income').value) || 0;
+      const fixed = parseFloat(document.getElementById('fixed').value) || 0;
+      const loan = parseFloat(document.getElementById('loan').value) || 0;
+      const loanMonth = parseInt(document.getElementById('loanMonth').value) || 1;
+      const daily = parseFloat(document.getElementById('daily').value) || 0;
+
+      const mealCost = daily * 30;
+      const loanInstallment = loan / loanMonth;
+      const charge = (income / 1000) * 15;
+
+      const available = income - fixed - loanInstallment - mealCost - charge;
+
+      document.getElementById('result').innerText = `
+        মোট আয়: ${income} টাকা\n
+        ফিক্সড খরচ: ${fixed} টাকা\n
+        ধার কিস্তি (${loanMonth} মাসে): ${loanInstallment.toFixed(2)} টাকা\n
+        মিল খরচ (৩০ দিন): ${mealCost} টাকা\n
+        চার্জ (১৫/১০০০): ${charge.toFixed(2)} টাকা\n
+        ---------------------------------------\n
+        হাতে থাকবে: ${available.toFixed(2)} টাকা
+      `;
+    }
+  </script>
+</body>
+</html>
